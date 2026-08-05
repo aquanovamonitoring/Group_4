@@ -1,0 +1,833 @@
+/* ==========================================
+   AquaNova — Control Panel View
+   CP Stylesheet
+   ========================================== */
+
+:root {
+    --color-primary: #059669;
+    --color-primary-light: #34d399;
+    --color-primary-dark: #065f46;
+    --color-bg-dark: #0a0f0a;
+    --color-bg-card: #111911;
+    --color-bg-sidebar: #0d130d;
+    --color-bg-main: #0f160f;
+    --color-surface: #1a2a1f;
+    --color-surface-light: #23332a;
+    --color-text-primary: #f0fdf4;
+    --color-text-secondary: #9ca3af;
+    --color-text-muted: #6b7280;
+    --color-border: #1f2f20;
+    --color-success: #10b981;
+    --color-warning: #f59e0b;
+    --color-danger: #ef4444;
+    --color-danger-dark: #dc2626;
+    --color-danger-darker: #b91c1c;
+    --color-water: #60a5fa;
+    --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+    --shadow-glow: 0 0 20px rgba(52, 211, 153, 0.15);
+    --radius-card: 16px;
+    --radius-sm: 8px;
+    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --color-gray-900: #1f2937;
+    --color-gray-700: #4b5563;
+    --color-gray-600: #374151;
+    --color-serial-bg: #050b05;
+}
+
+html[data-theme="light"] {
+    --color-primary: #4FC3F7;
+    --color-primary-light: #81D4FA;
+    --color-primary-dark: #0277BD;
+    --color-bg-dark: #F4FBFF;
+    --color-bg-card: #FFFFFF;
+    --color-bg-sidebar: #EAF7FC;
+    --color-bg-main: #F4FBFF;
+    --color-surface: #EAF7FC;
+    --color-surface-light: #D4F0FC;
+    --color-text-primary: #174A5C;
+    --color-text-secondary: #4F7485;
+    --color-text-muted: #7B9AA8;
+    --color-border: #B3E5FC;
+    --color-success: #10b981;
+    --color-warning: #f59e0b;
+    --color-danger: #ef4444;
+    --color-danger-dark: #dc2626;
+    --color-danger-darker: #b91c1c;
+    --color-water: #4FC3F7;
+    --shadow-card: 0 8px 24px rgba(79, 195, 247, 0.15);
+    --shadow-glow: 0 0 20px rgba(79, 195, 247, 0.15);
+    --color-gray-900: #174A5C;
+    --color-gray-700: #4F7485;
+    --color-gray-600: #7B9AA8;
+    --color-serial-bg: #d4eef8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font);
+    background: var(--color-bg-dark);
+    color: var(--color-text-primary);
+    min-height: 100vh;
+    background-image:
+        radial-gradient(ellipse at 20% 50%, rgba(5, 150, 105, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(52, 211, 153, 0.04) 0%, transparent 50%);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html[data-theme="light"] body {
+    background-image:
+        radial-gradient(ellipse at 20% 50%, rgba(79, 195, 247, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(129, 212, 250, 0.05) 0%, transparent 50%);
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track { background: var(--color-bg-dark); }
+::-webkit-scrollbar-thumb { background: var(--color-surface-light); border-radius: 3px; }
+
+/* --- CP Container --- */
+.cp-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* --- CP Header --- */
+.cp-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    margin-bottom: 24px;
+    animation: fadeIn 0.4s ease;
+}
+
+.cp-header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.cp-logo {
+    width: 36px;
+    height: 36px;
+}
+
+.cp-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+}
+
+.cp-subtitle {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+}
+
+.cp-header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.cp-connection {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+}
+
+.cp-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.cp-status-dot.online {
+    background: var(--color-success);
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+    animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.cp-back-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-primary-light);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    background: rgba(52, 211, 153, 0.08);
+    border: 1px solid rgba(52, 211, 153, 0.15);
+    transition: var(--transition);
+}
+
+.cp-back-btn:hover {
+    background: rgba(52, 211, 153, 0.15);
+    border-color: rgba(52, 211, 153, 0.3);
+}
+
+/* --- Theme Toggle --- */
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+}
+
+.theme-toggle:hover {
+    background: var(--color-surface-light);
+    color: var(--color-text-primary);
+}
+
+.theme-icon-sun,
+.theme-icon-moon {
+    position: absolute;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.theme-icon-sun {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+}
+
+.theme-icon-moon {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.5);
+}
+
+[data-theme="light"] .theme-icon-sun {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.5);
+}
+
+[data-theme="light"] .theme-icon-moon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+}
+
+/* --- CP Grid --- */
+.cp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    animation: fadeIn 0.5s ease 0.1s both;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- CP Card --- */
+.cp-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    padding: 24px;
+    transition: all var(--transition);
+}
+
+.cp-card:hover {
+    box-shadow: var(--shadow-card);
+    border-color: var(--color-surface-light);
+}
+
+.cp-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.cp-card-header svg {
+    color: var(--color-primary-light);
+    flex-shrink: 0;
+}
+
+.cp-card-header h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    flex: 1;
+}
+
+.cp-badge {
+    font-size: 0.7rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--color-surface);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+    white-space: nowrap;
+}
+
+/* --- CP Moisture --- */
+.cp-moisture-card {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+}
+
+.cp-moisture-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.cp-gauge-wrapper {
+    position: relative;
+    width: 240px;
+    height: 240px;
+}
+
+.cp-gauge-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.cp-gauge-progress {
+    transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: drop-shadow(0 0 8px rgba(52, 211, 153, 0.3));
+}
+
+.cp-gauge-glow {
+    filter: blur(10px);
+    transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cp-ticks {
+    opacity: 0.5;
+}
+
+.cp-gauge-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cp-gauge-value {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--color-text-primary);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+}
+
+.cp-gauge-unit {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+}
+
+.cp-gauge-status {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-top: 6px;
+    padding: 4px 14px;
+    border-radius: 20px;
+    transition: all 0.5s ease;
+}
+
+.cp-gauge-status.status-dry {
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--color-warning);
+}
+.cp-gauge-status.status-moist {
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--color-success);
+}
+.cp-gauge-status.status-wet {
+    background: rgba(96, 165, 250, 0.15);
+    color: var(--color-water);
+}
+
+.cp-bar-section {
+    width: 100%;
+    max-width: 320px;
+}
+
+.cp-bar-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+}
+
+.cp-bar-track {
+    width: 100%;
+    height: 12px;
+    background: var(--color-surface);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.cp-bar-fill {
+    height: 100%;
+    border-radius: 10px;
+    background: linear-gradient(90deg, var(--color-warning), var(--color-success), var(--color-water));
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cp-bar-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.cp-bar-zones {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4px;
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+}
+
+/* --- CP Irrigation --- */
+.cp-irrigation-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.cp-sprinkler-visual {
+    width: 80px;
+    height: 80px;
+}
+
+.cp-sprinkler-visual svg {
+    width: 100%;
+    height: 100%;
+}
+
+.cp-water-drops {
+    animation: cpWaterFall 1.5s ease-in-out infinite;
+}
+
+@keyframes cpWaterFall {
+    0%, 100% { transform: translateY(0); opacity: 0.7; }
+    50% { transform: translateY(3px); opacity: 0.3; }
+}
+
+.cp-toggle-section {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.cp-toggle-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    min-width: 110px;
+    text-align: right;
+}
+
+.cp-toggle {
+    position: relative;
+    width: 56px;
+    height: 30px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.cp-toggle input { display: none; }
+
+.cp-toggle-slider {
+    position: absolute;
+    inset: 0;
+    background: var(--color-surface);
+    border-radius: 30px;
+    border: 1px solid var(--color-border);
+    transition: var(--transition);
+}
+
+.cp-toggle-slider::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 22px;
+    height: 22px;
+    background: var(--color-text-muted);
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.cp-toggle input:checked + .cp-toggle-slider {
+    background: rgba(16, 185, 129, 0.2);
+    border-color: var(--color-primary-light);
+}
+
+.cp-toggle input:checked + .cp-toggle-slider::before {
+    transform: translateX(26px);
+    background: var(--color-primary-light);
+    box-shadow: 0 0 12px rgba(52, 211, 153, 0.4);
+}
+
+.cp-irrigation-btn {
+    padding: 14px 36px;
+    border-radius: 12px;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    font-family: var(--font);
+    cursor: pointer;
+    transition: all var(--transition);
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    color: white;
+    box-shadow: 0 4px 16px rgba(5, 150, 105, 0.3);
+}
+
+.cp-irrigation-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(5, 150, 105, 0.4);
+}
+
+.cp-irrigation-btn.off {
+    background: linear-gradient(135deg, var(--color-danger-dark), var(--color-danger-darker));
+    box-shadow: 0 4px 16px rgba(220, 38, 38, 0.3);
+}
+
+.cp-irrigation-btn.off:hover {
+    box-shadow: 0 6px 24px rgba(220, 38, 38, 0.4);
+}
+
+.cp-stats {
+    display: flex;
+    gap: 32px;
+}
+
+.cp-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.cp-stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.cp-stat-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    font-variant-numeric: tabular-nums;
+}
+
+/* --- CP Stats Card --- */
+.cp-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.cp-stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 14px;
+    background: var(--color-surface);
+    border-radius: var(--radius-sm);
+}
+
+.cp-stat-item-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+}
+
+.cp-stat-item-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+}
+
+.cp-stat-item-value.online {
+    color: var(--color-success);
+}
+
+/* --- CP Serial --- */
+.cp-serial-card {
+    grid-column: 1 / -1;
+}
+
+.cp-leds {
+    display: flex;
+    gap: 8px;
+}
+
+.cp-led {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: var(--color-bg-dark);
+}
+
+.cp-led.led-tx {
+    color: var(--color-warning);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.cp-led.led-rx {
+    color: var(--color-primary-light);
+    border: 1px solid rgba(52, 211, 153, 0.3);
+}
+
+.cp-led.active-tx {
+    background: rgba(245, 158, 11, 0.2);
+    animation: blink 0.5s ease;
+}
+
+.cp-led.active-rx {
+    background: rgba(52, 211, 153, 0.2);
+    animation: blink 0.5s ease;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+.cp-serial-output {
+    padding: 14px 16px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.82rem;
+    line-height: 1.7;
+    max-height: 120px;
+    overflow-y: auto;
+    background: var(--color-serial-bg);
+    border-radius: var(--radius-sm);
+}
+
+.cp-serial-line {
+    color: var(--color-text-muted);
+}
+
+/* --- Responsive --- */
+@media (max-width: 1024px) {
+    .cp-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cp-moisture-card {
+        grid-column: auto;
+        grid-row: auto;
+    }
+
+    .cp-stats-card {
+        grid-column: auto;
+    }
+
+    .cp-serial-card {
+        grid-column: auto;
+    }
+}
+
+@media (max-width: 640px) {
+    .cp-container {
+        padding: 12px;
+    }
+
+    .cp-header {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+        padding: 16px;
+    }
+
+    .cp-header-right {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .cp-gauge-wrapper {
+        width: 200px;
+        height: 200px;
+    }
+
+    .cp-gauge-value {
+        font-size: 2.4rem;
+    }
+
+    .cp-card {
+        padding: 16px;
+    }
+
+    .cp-irrigation-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .cp-stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- Theme Transitions --- */
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.cp-header,
+.cp-card,
+.cp-stat-item,
+.cp-serial-output,
+.cp-gauge-value,
+.cp-gauge-unit,
+.cp-card-header h2,
+.cp-title,
+.cp-subtitle,
+.cp-stat-item-label,
+.cp-stat-item-value,
+.cp-badge,
+.cp-toggle-label,
+.cp-stat-label,
+.cp-stat-value,
+.cp-led,
+.cp-led-tx,
+.cp-led-rx,
+.cp-serial-line,
+.cp-back-btn,
+.cp-status-dot,
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-thumb {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+svg * {
+    transition: fill 0.3s ease, stroke 0.3s ease;
+}
+
+.cp-irrigation-btn {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- Light Mode Overrides --- */
+html[data-theme="light"] .cp-header {
+    background: rgba(234, 247, 252, 0.85);
+    backdrop-filter: blur(12px);
+}
+
+html[data-theme="light"] .cp-card {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(10px);
+}
+
+html[data-theme="light"] .cp-stat-item {
+    background: var(--color-surface);
+}
+
+html[data-theme="light"] .cp-back-btn {
+    color: var(--color-primary);
+    background: rgba(79, 195, 247, 0.08);
+    border-color: rgba(79, 195, 247, 0.15);
+}
+
+html[data-theme="light"] .cp-back-btn:hover {
+    background: rgba(79, 195, 247, 0.15);
+    border-color: rgba(79, 195, 247, 0.3);
+}
+
+html[data-theme="light"] .cp-toggle-slider {
+    background: var(--color-surface);
+    border-color: var(--color-border);
+}
+
+html[data-theme="light"] .cp-toggle input:checked + .cp-toggle-slider {
+    background: rgba(79, 195, 247, 0.2);
+    border-color: var(--color-primary);
+}
+
+html[data-theme="light"] .cp-toggle input:checked + .cp-toggle-slider::before {
+    background: var(--color-primary);
+    box-shadow: 0 0 12px rgba(79, 195, 247, 0.4);
+}
+
+html[data-theme="light"] .cp-irrigation-btn {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    box-shadow: 0 4px 16px rgba(79, 195, 247, 0.3);
+}
+
+html[data-theme="light"] .cp-irrigation-btn:hover {
+    box-shadow: 0 6px 24px rgba(79, 195, 247, 0.4);
+}
+
+html[data-theme="light"] .cp-irrigation-btn.off {
+    background: linear-gradient(135deg, var(--color-danger-dark), var(--color-danger-darker));
+    box-shadow: 0 4px 16px rgba(220, 38, 38, 0.3);
+}
+
+html[data-theme="light"] .cp-irrigation-btn.off:hover {
+    box-shadow: 0 6px 24px rgba(220, 38, 38, 0.4);
+}
+
+html[data-theme="light"] .cp-irrigation-btn:focus-visible,
+html[data-theme="light"] .cp-back-btn:focus-visible {
+    box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.4);
+    outline: none;
+}
+
+html[data-theme="light"] .cp-gauge-ticks line {
+    stroke: var(--color-gray-600);
+}
+
+html[data-theme="light"] ::-webkit-scrollbar-track {
+    background: var(--color-bg-dark);
+}
+
+html[data-theme="light"] ::-webkit-scrollbar-thumb {
+    background: var(--color-surface-light);
+}
+
+html[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-muted);
+}
